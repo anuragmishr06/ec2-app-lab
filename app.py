@@ -58,7 +58,7 @@ def services():
 # while making EC2 make sure instance metadata is available and imdsv2 is optional
 # securitygroup all traffic allowing instance
 # sudo yum install -y git
-# git clone https://github.com/Zero0x00/seasides-cloud-ec2-lab.git
+# git clone https://github.com/anuragmishr06/ec2-app-lab.git
 # cd seasides-cloud-ec2-lab/
 # python3 -m venv lab-venv 
 # source lab-venv/bin/activate
