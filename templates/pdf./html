@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cyber Security Lab</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.303/pdf.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+    
+            header {
+                background-color: #ffffff;
+                color: #efe9e9;
+                text-align: center;
+                padding: 20px 0;
+            }
+    
+            nav {
+                background-color: #25274d;
+                color: #ffffff;
+                text-align: center;
+                padding: 10px 0;
+            }
+    
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
+    
+            nav ul li {
+                display: inline;
+                margin: 0 20px;
+            }
+    
+            nav a {
+                text-decoration: none;
+                color: #ffffff;
+            }
+    
+            main {
+                padding: 20px;
+            }
+    
+            h1 {
+                color: #25274d;
+                text-align: center;
+                margin: 20px 0;
+            }
+    
+            #pdfUrlInput, #pdfFileInput {
+                display: block;
+                margin: 10px auto;
+                padding: 5px;
+            }
+    
+            button {
+                display: block;
+                margin: 10px auto;
+                padding: 10px 20px;
+                background-color: #25274d;
+                color: #ffffff;
+                border: none;
+                cursor: pointer;
+            }
+    
+            #pdf-container {
+                text-align: center;
+            }
+    
+            footer {
+                background-color: #25274d;
+                color: #ffffff;
+                text-align: center;
+                padding: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the Cyber Security Lab</h1>
+        </header>
+    
+        <nav>
+            <ul>
+                <li><a href="/Home" class="nav-link">Home</a></li>
+                <li><a href="/About" class="nav-link">About</a></li>
+                <li><a href="/Services/pdf" class="nav-link">Services</a></li>
+                <li><a href="/Contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+
+    <main>
+        <section id="about">
+            <h2>Vulnerability</h2>
+<p>
+    SSRF (Server-Side Request Forgery) is a dangerous web vulnerability caused by poor programming practices. SSRF allows attackers to send requests from the server to other resources.
+    Attackers typically use SSRF attacks to target internal systems that are behind firewalls and are not accessible from the external network.
+
+    <h3>How SSRF Works:</h3>
+    <ol>
+        <li>The attacker identifies an application where a URL can be imported or where data is read from a URL.</li>
+        <li>The attacker attempts to modify the URL by providing a different URL or manipulating the existing one.</li>
+        <li>Once the manipulated URL is sent to the server, the server-side code tries to read data from the manipulated URL, allowing the attacker to potentially access services.</li>
+    </ol>
+
+    <h3>How to Prevent SSRF:</h3>
+    <ol>
+        <li>Never trust user input.</li>
+        <li>Implement whitelisting of domains and IP addresses.</li>
+        <li>Enable authentication on all services.</li>
+        <li>Sanitize and validate inputs.</li>
+    </ol>
+
+    <h3>SSRF Payloads:</h3>
+
+    <h4>SSRF with Blacklisted-Based Input Filters</h4>
+    <ol>
+        <li>Visit a product page, click "Check stock," and intercept the request in Burp Suite, then send it to Burp Repeater.</li>
+        <li>Change the URL in the "stockApi" parameter to "http://127.0.0.1/" and observe that the request is blocked.</li>
+        <li>Bypass the block by changing the URL to "http://127.1/".</li>
+        <li>Change the URL to "http://127.1/admin" and observe that the URL is blocked again.</li>
+        <li>Obfuscate the "a" by double-URL encoding it to "%2561" to access the admin interface and delete the target user.</li>
+    </ol>
+
+    <h4>SSRF with Filter Bypass via Open Redirection Vulnerability</h4>
+    <ol>
+        <li>Visit a product page, click "Check stock," and intercept the request in Burp Suite, then send it to Burp Repeater.</li>
+        <li>Try tampering with the "stockApi" parameter and observe that it isn't possible to make the server issue the request directly to a different host.</li>
+        <li>Click "next product" and observe that the "path" parameter is placed into the Location header of a redirection response, resulting in an open redirection.</li>
+        <li>Create a URL that exploits the open redirection vulnerability and redirects to the admin interface, then provide this URL as the "stockApi" parameter on the stock checker: "/product/nextProduct?path=http://192.168.0.12:8080/admin".</li>
+        <li>Observe that the stock checker follows the redirection and shows you the admin page.</li>
+        <li>Amend the path to delete the target user: "/product/nextProduct?path=http://192.168.0.12:8080/admin/delete?username=carlos".</li>
+    </ol>
+</p>
+
+        </section>
+    </main>
+
+    <h1>Lets Load the PDF from Internal System</h1>
+    <!-- 
+    path: Services/pdf/Url
+    parameter: url
+    it can used if not able to load (developer bypass) 
+    -->
+   
+    <script>
+           </script>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+        <p>&copy; 2023 Cyber Security Lab. All rights reserved.</p>
+    </footer>
+    <!-- https://seasides-lab.s3.ap-south-1.amazonaws.com/+Backup.txt -->
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
